@@ -79,6 +79,7 @@ Returns: "01101111011111111"
 // END CUT HERE
 #include <string>
 #include <iostream>
+#include <climits>
 #include <sstream>
 #include <vector>
 #include <algorithm>
@@ -134,6 +135,21 @@ class SpecialStrings {
 	}
 
 	bool isSpecial(string& current) {
+		int min = INT_MAX, cur = 0;
+		for (int i = 0; i < current.size(); ++i)
+		{
+			if (current[i] == '0')
+			{
+				i++;
+			} else {
+				if (cur > min)
+				{
+					return false;
+				}
+				min = cur;
+				cur = 0;
+			}
+		}
 		for (int i = 0; i < current.size() - 1; ++i)
 		{
 			if (current.substr(0, i+1) >= current.substr(i+1, current.size()-i-1))
